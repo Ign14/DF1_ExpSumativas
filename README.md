@@ -141,31 +141,6 @@ python -m http.server 8000
 # luego visita http://localhost:8000
 ```
 
----
-
-## 🌐 Publicación en GitHub Pages (rama `gh-pages`)
-
-El repositorio ya está inicializado con el remoto configurado y las ramas `main` y `gh-pages`.
-Para publicarlo:
-
-```bash
-git push -u origin main
-git push -u origin gh-pages
-```
-
-Luego, en GitHub: **Settings → Pages → Source: Deploy from a branch → Branch: `gh-pages` / `(root)` → Save**.
-El sitio queda disponible en https://ign14.github.io/DF1_ExpSumativas/ en pocos minutos.
-
----
-
-## 📦 Archivos para subir al AVA
-
-En la carpeta `entrega/` están las copias con el nombre solicitado por la actividad:
-
-- `Ignacio_PFY2201_CSS_Semana3.css` — hoja de estilos.
-- `Ignacio_PFY2201_HTML_Semana3.html` — documento HTML.
-
-Además debe subirse el enlace del repositorio y la URL de GitHub Pages.
 
 ---
 
