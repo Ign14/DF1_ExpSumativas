@@ -1,0 +1,923 @@
+/* =====================================================================
+   PixelPlay Store — Hoja de estilos principal
+   Actividad Sumativa Semana 3 — Desarrollo Frontend I (PFY2201)
+   Autor: Ignacio
+
+   Índice
+   01. Variables y reset (modelo de cajas)
+   02. Tipografía base y utilidades
+   03. Encabezado y navegación (Flexbox)
+   04. Hero (CSS Grid)
+   05. Productos destacados (CSS Grid + selectores avanzados)
+   06. Categorías (CSS Grid)
+   07. Ofertas (CSS Grid)
+   08. Contacto y formulario
+   09. Pie de página (Flexbox)
+   10. Media queries: móvil, tablet y escritorio
+   ===================================================================== */
+
+
+/* ============ 01. VARIABLES Y RESET (MODELO DE CAJAS) ============ */
+
+:root {
+  /* Paleta de colores */
+  --color-fondo: #f4f5fb;
+  --color-superficie: #ffffff;
+  --color-oscuro: #12102a;
+  --color-oscuro-alt: #1d1a3d;
+  --color-primario: #5b3df5;
+  --color-primario-claro: #7c5cff;
+  --color-acento: #12805c;
+  --color-acento-claro: #3ddc97;
+  --color-texto: #1c1b2e;
+  --color-texto-suave: #4d4a68;
+  --color-borde: #d9d8ea;
+
+  /* Tipografías */
+  --fuente-titulos: "Trebuchet MS", "Segoe UI", Tahoma, Verdana, sans-serif;
+  --fuente-texto: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Espaciado y formas */
+  --espacio-xs: 0.5rem;
+  --espacio-sm: 1rem;
+  --espacio-md: 1.5rem;
+  --espacio-lg: 2.5rem;
+  --radio: 12px;
+  --sombra: 0 6px 18px rgba(18, 16, 42, 0.10);
+  --ancho-max: 1200px;
+}
+
+/* Reset del modelo de cajas: el padding y el borde se incluyen en el ancho */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--fuente-texto);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+
+/* ============ 02. TIPOGRAFÍA BASE Y UTILIDADES ============ */
+
+h1, h2, h3 {
+  font-family: var(--fuente-titulos);
+  line-height: 1.25;
+  margin: 0 0 var(--espacio-xs);
+  color: var(--color-oscuro);
+}
+
+h1 { font-size: 1.75rem; letter-spacing: 0.5px; }
+h2 { font-size: 1.6rem; }
+h3 { font-size: 1.15rem; }
+
+p {
+  margin: 0 0 var(--espacio-sm);
+  color: var(--color-texto-suave);
+}
+
+a {
+  color: var(--color-primario);
+  text-decoration: none;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+a:hover,
+a:focus {
+  color: var(--color-oscuro);
+  text-decoration: underline;
+}
+
+/* Foco visible para navegación por teclado (accesibilidad) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--color-primario-claro);
+  outline-offset: 2px;
+}
+
+/* Enlace de salto: sólo visible al enfocarlo con el teclado */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  z-index: 100;
+  padding: var(--espacio-xs) var(--espacio-sm);
+  background-color: var(--color-oscuro);
+  color: #ffffff;
+  border-radius: 0 0 var(--radio) 0;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+.section-header {
+  margin-bottom: var(--espacio-lg);
+  text-align: center;
+}
+
+.section-title {
+  position: relative;
+  display: inline-block;
+  padding-bottom: var(--espacio-xs);
+  margin-bottom: var(--espacio-xs);
+}
+
+/* Subrayado decorativo bajo cada título de sección */
+.section-title::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 4px;
+  margin: var(--espacio-xs) auto 0;
+  border-radius: 4px;
+  background-color: var(--color-primario);
+}
+
+.section-subtitle {
+  max-width: 62ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Botones */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.7rem 1.4rem;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  font-family: var(--fuente-titulos);
+  font-size: 0.95rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btn--primary {
+  background-color: var(--color-primario);
+  color: #ffffff;
+}
+
+.btn--primary:hover,
+.btn--primary:focus {
+  background-color: var(--color-oscuro);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.btn--ghost {
+  background-color: transparent;
+  border-color: var(--color-primario);
+  color: var(--color-primario);
+}
+
+.btn--ghost:hover,
+.btn--ghost:focus {
+  background-color: var(--color-primario);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.btn--small {
+  width: 100%;
+  padding: 0.55rem 1rem;
+  background-color: var(--color-oscuro);
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.btn--small:hover,
+.btn--small:focus {
+  background-color: var(--color-acento);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* Secciones principales: ancho máximo y separación uniforme */
+main > section {
+  width: 100%;
+  max-width: var(--ancho-max);
+  margin: 0 auto;
+  padding: var(--espacio-lg) var(--espacio-md);
+}
+
+
+/* ============ 03. ENCABEZADO Y NAVEGACIÓN (FLEXBOX) ============ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--color-oscuro);
+  border-bottom: 4px solid var(--color-primario);
+  box-shadow: var(--sombra);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-sm);
+  width: 100%;
+  max-width: var(--ancho-max);
+  margin: 0 auto;
+  padding: var(--espacio-sm) var(--espacio-md);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-xs);
+}
+
+.brand__logo {
+  width: 56px;
+  height: 56px;
+  border: 2px solid var(--color-primario-claro);
+  border-radius: var(--radio);
+  padding: 2px;
+  background-color: var(--color-oscuro-alt);
+}
+
+.brand__name {
+  color: #ffffff;
+  font-size: 1.45rem;
+  margin-bottom: 0;
+}
+
+.brand__tagline {
+  margin: 0;
+  color: #c9c6ea;
+  font-size: 0.85rem;
+}
+
+/* Barra de navegación organizada con Flexbox */
+.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-xs);
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  min-height: 44px; /* objetivo táctil accesible */
+  padding: 0.45rem 0.9rem;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  color: #e8e6ff;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  background-color: var(--color-primario);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.nav-link--active {
+  border-color: var(--color-primario-claro);
+  color: #ffffff;
+}
+
+
+/* ============ 04. HERO (CSS GRID) ============ */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espacio-lg);
+  align-items: center;
+  margin-top: var(--espacio-md);
+  padding: var(--espacio-lg) var(--espacio-md);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  background: linear-gradient(135deg, #1d1a3d 0%, #3a2a7a 60%, #5b3df5 100%);
+  box-shadow: var(--sombra);
+}
+
+.hero__title {
+  color: #ffffff;
+  font-size: 2rem;
+}
+
+.hero__text {
+  max-width: 60ch;
+  color: #ded9ff;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-xs);
+  margin-bottom: 0;
+}
+
+.hero__actions .btn--primary {
+  background-color: var(--color-acento-claro);
+  color: var(--color-oscuro);
+}
+
+.hero__actions .btn--primary:hover,
+.hero__actions .btn--primary:focus {
+  background-color: #ffffff;
+  color: var(--color-oscuro);
+}
+
+.hero__actions .btn--ghost {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.hero__actions .btn--ghost:hover,
+.hero__actions .btn--ghost:focus {
+  background-color: #ffffff;
+  color: var(--color-oscuro);
+}
+
+.hero__stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espacio-sm);
+}
+
+.hero__stats li {
+  padding: var(--espacio-sm);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--radio);
+  background-color: rgba(255, 255, 255, 0.10);
+  text-align: center;
+}
+
+.hero__stats strong {
+  display: block;
+  color: #ffffff;
+  font-family: var(--fuente-titulos);
+  font-size: 1.5rem;
+}
+
+.hero__stats span {
+  color: #ded9ff;
+  font-size: 0.85rem;
+}
+
+
+/* ============ 05. PRODUCTOS DESTACADOS (CSS GRID) ============ */
+
+/* Grid fluido: se adapta solo al ancho disponible */
+.grid-productos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espacio-md);
+}
+
+.producto > article {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  background-color: var(--color-superficie);
+  box-shadow: var(--sombra);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.producto > article:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-primario);
+  box-shadow: 0 14px 28px rgba(91, 61, 245, 0.22);
+}
+
+.producto__img {
+  width: 100%;
+  border-bottom: 4px solid var(--color-primario);
+}
+
+.producto__body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: var(--espacio-sm) var(--espacio-md) var(--espacio-md);
+}
+
+.producto__desc {
+  flex-grow: 1;
+  font-size: 0.95rem;
+}
+
+/* Etiquetas de plataforma/género con Flexbox */
+.producto__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-xs);
+  margin-bottom: var(--espacio-sm);
+}
+
+.producto__meta li {
+  padding: 0.15rem 0.7rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 999px;
+  background-color: #eeecff;
+  color: var(--color-oscuro-alt);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.producto__precio {
+  margin-bottom: var(--espacio-sm);
+  color: var(--color-acento);
+  font-family: var(--fuente-titulos);
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+/* --- Selectores avanzados --- */
+
+/* Alterna un fondo suave en las tarjetas pares */
+.grid-productos .producto:nth-child(even) > article {
+  background-color: #fbfaff;
+}
+
+/* Cinta sobre la portada: primera tarjeta = más vendido, última = novedad */
+.grid-productos .producto:first-child > article::after,
+.grid-productos .producto:last-child > article::after {
+  position: absolute;
+  top: var(--espacio-sm);
+  right: 0;
+  z-index: 2;
+  padding: 0.25rem 0.9rem;
+  border-radius: 999px 0 0 999px;
+  background-color: var(--color-primario);
+  color: #ffffff;
+  font-family: var(--fuente-titulos);
+  font-size: 0.72rem;
+  font-weight: bold;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.grid-productos .producto:first-child > article::after {
+  content: "★ Más vendido";
+}
+
+.grid-productos .producto:last-child > article::after {
+  content: "Novedad";
+  background-color: var(--color-acento);
+}
+
+/* Primera etiqueta de cada tarjeta = plataforma, se resalta */
+.producto__meta li:first-child {
+  border-color: var(--color-primario);
+  background-color: var(--color-primario);
+  color: #ffffff;
+}
+
+
+/* ============ 06. CATEGORÍAS (CSS GRID) ============ */
+
+.categorias {
+  border-top: 1px solid var(--color-borde);
+}
+
+.categorias__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espacio-md);
+}
+
+.categoria {
+  padding: var(--espacio-md);
+  border: 1px solid var(--color-borde);
+  border-left: 6px solid var(--color-primario);
+  border-radius: var(--radio);
+  background-color: var(--color-superficie);
+  box-shadow: var(--sombra);
+}
+
+/* Cada tarjeta de categoría con un color de acento distinto */
+.categoria:nth-child(2) { border-left-color: var(--color-acento); }
+.categoria:nth-child(3) { border-left-color: #e0a800; }
+
+.lista-enlaces li {
+  border-bottom: 1px dashed var(--color-borde);
+}
+
+.lista-enlaces li:last-child {
+  border-bottom: none;
+}
+
+/* Toda la fila es un objetivo táctil de 44 px de alto */
+.lista-enlaces a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.25rem 0;
+}
+
+
+/* ============ 07. OFERTAS (CSS GRID) ============ */
+
+.ofertas {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espacio-lg);
+  align-items: center;
+}
+
+.pasos {
+  margin: 0;
+  padding-left: 1.4rem;
+  list-style: decimal;
+  color: var(--color-texto-suave);
+}
+
+.pasos li {
+  margin-bottom: var(--espacio-xs);
+  padding-left: var(--espacio-xs);
+}
+
+.pasos li::marker {
+  color: var(--color-primario);
+  font-family: var(--fuente-titulos);
+  font-weight: bold;
+}
+
+.ofertas__banner {
+  padding: var(--espacio-lg) var(--espacio-md);
+  border: 2px dashed var(--color-primario);
+  border-radius: var(--radio);
+  background-color: var(--color-oscuro);
+  text-align: center;
+}
+
+.ofertas__banner h3 {
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ofertas__banner p {
+  color: #ded9ff;
+}
+
+.ofertas__descuento {
+  margin: var(--espacio-xs) 0;
+  color: var(--color-acento-claro);
+  font-family: var(--fuente-titulos);
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
+
+/* ============ 08. CONTACTO Y FORMULARIO ============ */
+
+.contacto {
+  border-top: 1px solid var(--color-borde);
+}
+
+.contacto__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espacio-md);
+}
+
+.contacto__datos,
+.contacto__form {
+  padding: var(--espacio-md);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  background-color: var(--color-superficie);
+  box-shadow: var(--sombra);
+}
+
+.lista-datos li {
+  padding: var(--espacio-xs) 0;
+  border-bottom: 1px solid var(--color-borde);
+  color: var(--color-texto-suave);
+}
+
+.lista-datos li:last-child {
+  border-bottom: none;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: var(--espacio-sm);
+}
+
+.campo label {
+  color: var(--color-oscuro);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.campo input,
+.campo textarea {
+  min-height: 44px;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  background-color: #fbfbff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--color-texto);
+}
+
+.campo input:focus,
+.campo textarea:focus {
+  border-color: var(--color-primario);
+  background-color: #ffffff;
+}
+
+
+/* ============ 09. PIE DE PÁGINA (FLEXBOX) ============ */
+
+.site-footer {
+  margin-top: var(--espacio-lg);
+  padding: var(--espacio-lg) var(--espacio-md) var(--espacio-sm);
+  border-top: 4px solid var(--color-primario);
+  background-color: var(--color-oscuro);
+  color: #ded9ff;
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--espacio-lg);
+  width: 100%;
+  max-width: var(--ancho-max);
+  margin: 0 auto;
+}
+
+.footer-col {
+  flex: 1 1 240px;
+}
+
+.footer-title {
+  color: #ffffff;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.site-footer p {
+  color: #c9c6ea;
+  font-size: 0.9rem;
+}
+
+.site-footer a {
+  color: var(--color-acento-claro);
+}
+
+/* Los separadores del pie se adaptan al fondo oscuro */
+.site-footer .lista-enlaces li {
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.site-footer a:hover,
+.site-footer a:focus {
+  color: #ffffff;
+}
+
+/* Redes sociales en línea con Flexbox */
+.redes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-xs);
+}
+
+.redes a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.3rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+.redes a:hover,
+.redes a:focus {
+  background-color: var(--color-primario);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.footer-legal {
+  max-width: var(--ancho-max);
+  margin: var(--espacio-lg) auto 0;
+  padding-top: var(--espacio-sm);
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  text-align: center;
+  font-size: 0.82rem;
+}
+
+
+/* =====================================================================
+   10. MEDIA QUERIES — enfoque mobile first
+   Base (arriba)      : móviles      < 600 px
+   Tablet             : >= 600 px
+   Escritorio         : >= 992 px
+   Escritorio amplio  : >= 1400 px
+   ===================================================================== */
+
+/* ---------- MÓVIL (< 600 px): encabezado compacto ---------- */
+@media screen and (max-width: 599px) {
+
+  /* En pantallas pequeñas el encabezado no queda fijo para no robar altura */
+  .site-header {
+    position: static;
+  }
+
+  .header-inner {
+    justify-content: center;
+    padding: var(--espacio-sm);
+    text-align: center;
+  }
+
+  .brand__tagline {
+    display: none;
+  }
+
+  .brand__name {
+    font-size: 1.25rem;
+  }
+
+  .brand__logo {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* La navegación se separa de la marca con una línea sutil */
+  .nav-list {
+    justify-content: center;
+    width: 100%;
+    padding-top: var(--espacio-xs);
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .nav-link {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.88rem;
+  }
+
+  /* Botones a ancho completo: objetivo táctil amplio y alineación limpia */
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+  }
+
+  .hero {
+    padding: var(--espacio-md) var(--espacio-sm);
+  }
+
+  main > section {
+    padding: var(--espacio-md) var(--espacio-sm);
+  }
+}
+
+/* ---------- TABLET (>= 600 px) ---------- */
+@media screen and (min-width: 600px) {
+
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.8rem; }
+
+  .hero__title { font-size: 2.4rem; }
+
+  .hero__stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid-productos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .categorias__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contacto__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  main > section {
+    padding: var(--espacio-lg);
+  }
+}
+
+/* ---------- ESCRITORIO (>= 992 px) ---------- */
+@media screen and (min-width: 992px) {
+
+  body { font-size: 17px; }
+
+  .header-inner {
+    flex-wrap: nowrap;
+  }
+
+  .hero {
+    grid-template-columns: 1.6fr 1fr;
+    padding: 3rem var(--espacio-lg);
+  }
+
+  .hero__title { font-size: 2.8rem; }
+
+  .hero__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-productos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .categorias__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .ofertas {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* ---------- ESCRITORIO AMPLIO (>= 1400 px) ---------- */
+@media screen and (min-width: 1400px) {
+
+  :root {
+    --ancho-max: 1320px;
+  }
+
+  .hero__title { font-size: 3.1rem; }
+}
+
+/* ---------- PREFERENCIAS DE ACCESIBILIDAD ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- IMPRESIÓN ---------- */
+@media print {
+  .site-header,
+  .site-footer,
+  .hero__actions,
+  .btn {
+    display: none;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: #000000;
+  }
+}
