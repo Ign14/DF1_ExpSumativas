@@ -1,0 +1,247 @@
+/* =====================================================================
+   PixelPlay Store - Estilos propios sobre Bootstrap 5
+   Actividad Sumativa Semana 6 - Desarrollo Frontend I (PFY2201)
+   Autor: Ignacio Miño Astorga
+
+   Esta hoja NO reemplaza a Bootstrap: solo ajusta la identidad visual de
+   la tienda (paleta, carrusel, tarjetas y estados) sobre sus utilidades.
+
+   Índice
+   01. Variables de marca
+   02. Accesibilidad
+   03. Carrusel
+   04. Tarjetas de producto
+   05. Carrito
+   06. Estados de carga y error
+   07. Ajustes responsivos
+   ===================================================================== */
+
+
+/* ============ 01. VARIABLES DE MARCA ============ */
+
+:root {
+  --pp-primario: #5b3df5;
+  --pp-primario-claro: #7c5cff;
+  --pp-acento: #12805c;
+  --pp-oscuro: #12102a;
+}
+
+/* Se redefinen tokens propios de Bootstrap para heredar la marca
+   en todos sus componentes sin reescribir cada regla */
+body {
+  --bs-dark-rgb: 18, 16, 42;
+  --bs-info: var(--pp-primario-claro);
+  --bs-info-rgb: 124, 92, 255;
+  --bs-link-color: var(--pp-primario);
+  --bs-link-hover-color: var(--pp-oscuro);
+}
+
+.btn-info {
+  --bs-btn-bg: var(--pp-primario);
+  --bs-btn-border-color: var(--pp-primario);
+  --bs-btn-color: #fff;
+  --bs-btn-hover-bg: var(--pp-primario-claro);
+  --bs-btn-hover-border-color: var(--pp-primario-claro);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-bg: var(--pp-oscuro);
+  --bs-btn-active-border-color: var(--pp-oscuro);
+  --bs-btn-disabled-bg: var(--pp-primario);
+  --bs-btn-disabled-border-color: var(--pp-primario);
+  --bs-btn-disabled-color: #fff;
+}
+
+.btn-outline-info {
+  --bs-btn-color: #cfc6ff;
+  --bs-btn-border-color: var(--pp-primario-claro);
+  --bs-btn-hover-bg: var(--pp-primario);
+  --bs-btn-hover-border-color: var(--pp-primario);
+  --bs-btn-hover-color: #fff;
+}
+
+.text-info {
+  color: var(--pp-primario-claro) !important;
+}
+
+
+/* ============ 02. ACCESIBILIDAD ============ */
+
+/* Objetivo táctil mínimo de 44 px en los controles principales */
+.navbar .nav-link,
+.btn-group .btn,
+#detalleCarrito .btn {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.navbar .nav-link {
+  justify-content: flex-start;
+}
+
+.btn-group .btn,
+#detalleCarrito .btn {
+  justify-content: center;
+}
+
+/* Foco siempre visible al navegar con teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--pp-primario-claro);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  z-index: 1080;
+  padding: .5rem 1rem;
+  background-color: var(--pp-oscuro);
+  color: #fff;
+}
+
+
+/* ============ 03. CARRUSEL ============ */
+
+.carousel-img {
+  height: clamp(220px, 38vw, 420px);
+  object-fit: cover;
+}
+
+/* Degradado inferior para que el texto del caption siempre contraste */
+.carousel-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(11, 10, 23, .85) 0%, rgba(11, 10, 23, 0) 60%);
+  pointer-events: none;
+}
+
+.carousel-caption {
+  z-index: 2;
+  right: 10%;
+  left: 10%;
+  bottom: 1.5rem;
+}
+
+.carousel-caption h2 {
+  font-size: clamp(1.25rem, 3.2vw, 2.25rem);
+}
+
+
+/* ============ 04. TARJETAS DE PRODUCTO ============ */
+
+.producto-card {
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.producto-card:hover,
+.producto-card:focus-within {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(91, 61, 245, .22) !important;
+}
+
+.producto-card .card-img-top {
+  aspect-ratio: 400 / 260;
+  object-fit: cover;
+  background-color: var(--pp-oscuro);
+}
+
+.producto-precio {
+  color: var(--pp-acento);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.producto-precio-anterior {
+  font-size: .9rem;
+  text-decoration: line-through;
+}
+
+/* Cinta de descuento sobre la portada */
+.producto-cinta {
+  position: absolute;
+  top: .75rem;
+  right: 0;
+  border-radius: 999px 0 0 999px;
+  font-size: .72rem;
+  letter-spacing: .5px;
+}
+
+
+/* ============ 05. CARRITO ============ */
+
+.carrito-item {
+  border-bottom: 1px solid rgba(255, 255, 255, .15);
+}
+
+.carrito-item:last-child {
+  border-bottom: none;
+}
+
+.carrito-miniatura {
+  width: 72px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: .375rem;
+  background-color: var(--pp-oscuro);
+}
+
+/* Estado vacío del carrito */
+.carrito-vacio {
+  border: 2px dashed rgba(255, 255, 255, .25);
+  border-radius: .5rem;
+}
+
+
+/* ============ 06. ESTADOS DE CARGA Y ERROR ============ */
+
+/* Esqueletos mostrados mientras la Fetch API resuelve la promesa */
+.esqueleto {
+  background: linear-gradient(90deg, #e9ecef 25%, #f8f9fa 37%, #e9ecef 63%);
+  background-size: 400% 100%;
+  animation: esqueleto-brillo 1.4s ease infinite;
+  border-radius: .375rem;
+}
+
+@keyframes esqueleto-brillo {
+  0%   { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+.esqueleto-img {
+  aspect-ratio: 400 / 260;
+}
+
+
+/* ============ 07. AJUSTES RESPONSIVOS ============ */
+
+@media (max-width: 575.98px) {
+
+  /* En móvil el caption compite con la imagen: se deja solo el título */
+  .carousel-caption {
+    right: 5%;
+    left: 5%;
+    bottom: 1rem;
+  }
+
+  .btn-group[role="group"] {
+    flex-wrap: wrap;
+  }
+
+  .btn-group[role="group"] > .btn {
+    flex: 1 1 auto;
+  }
+}
+
+/* Respeta la preferencia de movimiento reducido del sistema */
+@media (prefers-reduced-motion: reduce) {
+
+  .producto-card,
+  .carousel-item {
+    transition: none;
+  }
+
+  .esqueleto {
+    animation: none;
+  }
+}
