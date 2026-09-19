@@ -1,40 +1,19 @@
-/* =====================================================================
-   utilidades.js - Funciones auxiliares reutilizables
-   PixelPlay Store | Sumativa Semana 6 - PFY2201
+/* utilidades.js - Funciones auxiliares compartidas por los demás módulos. */
 
-   Reúne las operaciones que repiten los demás módulos: selección de
-   elementos, formato de moneda, avisos y notificaciones. Al centralizarlas
-   aquí se evita duplicar código en catalogo.js y carrito.js.
-   ===================================================================== */
-
-// Se expone un único objeto global para no contaminar window con
-// decenas de nombres sueltos.
 const PP = window.PP || {};
 window.PP = PP;
 
 PP.utilidades = (function () {
   'use strict';
 
-  /**
-   * Devuelve el primer elemento que coincide con el selector.
-   * Atajo de document.querySelector usado por todos los módulos.
-   */
   function $(selector, contexto) {
     return (contexto || document).querySelector(selector);
   }
 
-  /**
-   * Devuelve un arreglo real (no NodeList) con todas las coincidencias,
-   * de modo que se puedan usar map, filter y forEach sin conversiones.
-   */
   function $$(selector, contexto) {
     return Array.from((contexto || document).querySelectorAll(selector));
   }
 
-  /**
-   * Formatea un número como precio chileno: 39990 -> "$39.990".
-   * Se usa tanto en las tarjetas del catálogo como en los totales.
-   */
   function formatearPrecio(valor) {
     return new Intl.NumberFormat('es-CL', {
       style: 'currency',
@@ -43,29 +22,18 @@ PP.utilidades = (function () {
     }).format(valor);
   }
 
-  /**
-   * Escapa caracteres peligrosos antes de insertar texto con innerHTML.
-   * Evita que un dato del JSON pueda inyectar etiquetas en la página.
-   */
+  /** Evita que un dato del JSON inyecte etiquetas al usar innerHTML. */
   function escapar(texto) {
     const div = document.createElement('div');
     div.textContent = texto == null ? '' : String(texto);
     return div.innerHTML;
   }
 
-  /**
-   * Calcula el porcentaje de descuento entre el precio anterior y el actual.
-   * Devuelve 0 cuando el producto no está en oferta.
-   */
   function calcularDescuento(precio, precioAnterior) {
     if (!precioAnterior || precioAnterior <= precio) return 0;
     return Math.round((1 - precio / precioAnterior) * 100);
   }
 
-  /**
-   * Pinta un aviso de Bootstrap dentro del contenedor indicado.
-   * tipo admite los sufijos de alert de Bootstrap: info, warning, danger…
-   */
   function mostrarAviso(contenedor, tipo, titulo, mensaje, accionesHTML) {
     if (!contenedor) return;
     contenedor.innerHTML = [
@@ -77,15 +45,11 @@ PP.utilidades = (function () {
     ].join('\n');
   }
 
-  /** Vacía el contenedor de avisos. */
   function limpiarAvisos(contenedor) {
     if (contenedor) contenedor.innerHTML = '';
   }
 
-  /**
-   * Muestra una notificación emergente (toast de Bootstrap) y la destruye
-   * del DOM cuando termina de ocultarse, para no acumular nodos huérfanos.
-   */
+  /** El toast se elimina del DOM al ocultarse para no acumular nodos. */
   function notificar(mensaje, tipo) {
     const zona = $('#zonaToasts');
     if (!zona) return;
@@ -117,7 +81,6 @@ PP.utilidades = (function () {
     }
   }
 
-  // API pública del módulo
   return {
     $: $,
     $$: $$,

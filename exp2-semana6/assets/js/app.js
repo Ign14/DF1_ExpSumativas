@@ -1,11 +1,4 @@
-/* =====================================================================
-   app.js - Punto de entrada de la aplicación
-   PixelPlay Store | Sumativa Semana 6 - PFY2201
-
-   Coordina los módulos: inicializa carrito y catálogo, dispara la carga
-   de datos con la Fetch API y decide qué mostrar cuando algo falla.
-   No manipula el DOM directamente: delega en los módulos especializados.
-   ===================================================================== */
+/* app.js - Punto de entrada: inicializa los módulos y pide el catálogo. */
 
 window.PP = window.PP || {};
 
@@ -14,30 +7,22 @@ PP.app = (function () {
 
   const u = PP.utilidades;
 
-  /**
-   * Pide el catálogo y resuelve los dos caminos posibles de la promesa.
-   * Se invoca al arrancar y cada vez que el usuario pulsa «Reintentar».
-   */
+  /** Se invoca al arrancar y desde el botón Reintentar. */
   function cargarCatalogo() {
     PP.catalogo.mostrarCargando();
 
     PP.datos.obtenerProductos()
       .then(function (productos) {
-        // Camino feliz: los datos llegaron y pasaron la validación
         PP.catalogo.establecerProductos(productos);
         u.notificar('Catálogo cargado: ' + productos.length + ' productos', 'success');
       })
       .catch(function (error) {
-        // Camino de error: se informa al usuario en lenguaje claro
         console.error('[PixelPlay] Error al cargar el catálogo:', error);
         mostrarErrorDeCarga(error);
       });
   }
 
-  /**
-   * Pinta el mensaje amigable de error con dos salidas para el usuario:
-   * reintentar la descarga o ver un catálogo de demostración.
-   */
+  /** Mensaje de error con dos salidas: reintentar o ver datos de respaldo. */
   function mostrarErrorDeCarga(error) {
     const info = PP.datos.describirError(error);
     const avisos = u.$('#zonaAvisos');
@@ -79,7 +64,6 @@ PP.app = (function () {
     }
   }
 
-  /** Arranque: prepara los módulos y lanza la carga de datos. */
   function iniciar() {
     PP.carrito.iniciar();
     PP.catalogo.iniciar();
@@ -92,5 +76,4 @@ PP.app = (function () {
   };
 })();
 
-// Se espera a que el DOM esté disponible antes de tocar sus elementos.
 document.addEventListener('DOMContentLoaded', PP.app.iniciar);

@@ -1,12 +1,4 @@
-/* =====================================================================
-   carrito.js - Estado y render del carrito de compras
-   PixelPlay Store | Sumativa Semana 6 - PFY2201
-
-   Mantiene las líneas del carrito en memoria y las refleja en el DOM:
-   detalle de productos, contador de la barra de navegación y totales.
-   Toda modificación pasa por una sola función de render, de modo que la
-   vista nunca queda desincronizada del estado.
-   ===================================================================== */
+/* carrito.js - Estado del carrito y su reflejo en el DOM. */
 
 window.PP = window.PP || {};
 
@@ -21,12 +13,10 @@ PP.carrito = (function () {
   // Estado: cada línea es { producto, cantidad }
   let lineas = [];
 
-  // Referencias al DOM, resueltas una sola vez en iniciar()
   let refs = {};
 
   /* ---------- Operaciones sobre el estado ---------- */
 
-  /** Busca la línea de un producto por su id. */
   function buscarLinea(id) {
     return lineas.find(function (linea) {
       return linea.producto.id === id;
@@ -69,7 +59,6 @@ PP.carrito = (function () {
     render();
   }
 
-  /** Elimina por completo una línea del carrito. */
   function eliminar(id) {
     lineas = lineas.filter(function (linea) {
       return linea.producto.id !== id;
@@ -77,7 +66,6 @@ PP.carrito = (function () {
     render();
   }
 
-  /** Deja el carrito sin líneas. */
   function vaciar() {
     lineas = [];
     render();
@@ -85,10 +73,7 @@ PP.carrito = (function () {
 
   /* ---------- Cálculos derivados ---------- */
 
-  /**
-   * Devuelve los totales del carrito. Se recalcula siempre desde el estado
-   * para que no existan cifras almacenadas que puedan quedar desfasadas.
-   */
+  /** Se recalcula desde el estado en cada render: no se guardan totales. */
   function calcularTotales() {
     const unidades = lineas.reduce(function (suma, linea) {
       return suma + linea.cantidad;
@@ -110,7 +95,6 @@ PP.carrito = (function () {
 
   /* ---------- Render ---------- */
 
-  /** Construye el HTML de una línea del carrito. */
   function plantillaLinea(linea) {
     const p = linea.producto;
     const importe = p.precio * linea.cantidad;
@@ -133,7 +117,6 @@ PP.carrito = (function () {
     ].join('\n');
   }
 
-  /** HTML mostrado cuando todavía no hay productos agregados. */
   function plantillaVacio() {
     return [
       '<div class="carrito-vacio text-center p-4">',
@@ -144,26 +127,20 @@ PP.carrito = (function () {
     ].join('\n');
   }
 
-  /**
-   * Vuelca el estado completo en el DOM: detalle, contador y totales.
-   * Es la única función que escribe en la interfaz del carrito.
-   */
+  /** Única función que escribe en la interfaz del carrito. */
   function render() {
     const totales = calcularTotales();
 
-    // Detalle de líneas
     if (refs.detalle) {
       refs.detalle.innerHTML = lineas.length === 0
         ? plantillaVacio()
         : '<ul class="list-unstyled mb-0">' + lineas.map(plantillaLinea).join('\n') + '</ul>';
     }
 
-    // Contador de la barra de navegación
     if (refs.contador) {
       refs.contador.textContent = totales.unidades;
     }
 
-    // Totales de la columna lateral
     if (refs.unidades) refs.unidades.textContent = totales.unidades;
     if (refs.subtotal) refs.subtotal.textContent = u.formatearPrecio(totales.subtotal);
     if (refs.despacho) {
@@ -181,11 +158,8 @@ PP.carrito = (function () {
 
   /* ---------- Eventos ---------- */
 
-  /**
-   * Un único listener en el contenedor atiende los botones de todas las
-   * líneas (delegación de eventos): funciona también para las que se
-   * agreguen después, sin volver a registrar listeners.
-   */
+  /* Delegación de eventos: un listener en el contenedor cubre las líneas
+     que se creen después, sin volver a registrar nada. */
   function registrarEventos() {
     if (refs.detalle) {
       refs.detalle.addEventListener('click', function (evento) {
@@ -223,7 +197,6 @@ PP.carrito = (function () {
     }
   }
 
-  /** Resuelve las referencias del DOM, engancha eventos y pinta el estado inicial. */
   function iniciar() {
     refs = {
       detalle: u.$('#detalleCarrito'),

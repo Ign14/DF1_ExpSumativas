@@ -3,8 +3,7 @@
    Actividad Sumativa Semana 6 - Desarrollo Frontend I (PFY2201)
    Autor: Ignacio Miño Astorga
 
-   Esta hoja NO reemplaza a Bootstrap: solo ajusta la identidad visual de
-   la tienda (paleta, carrusel, tarjetas y estados) sobre sus utilidades.
+   Ajusta la identidad visual de la tienda sobre las utilidades de Bootstrap.
 
    Índice
    01. Variables de marca
@@ -15,7 +14,6 @@
    06. Estados de carga y error
    07. Ajustes responsivos
    ===================================================================== */
-
 
 /* ============ 01. VARIABLES DE MARCA ============ */
 
@@ -62,7 +60,6 @@ body {
   color: var(--pp-primario-claro) !important;
 }
 
-
 /* ============ 02. ACCESIBILIDAD ============ */
 
 /* Objetivo táctil mínimo de 44 px (WCAG 2.5.8) en todos los controles
@@ -100,14 +97,13 @@ footer .nav-link {
   border-bottom-width: 12px;
 }
 
-/* El boton de cierre de los toasts tambien debe ser alcanzable con el pulgar */
+/* El botón de cierre del toast también debe alcanzarse con el pulgar */
 .toast .btn-close {
   width: 44px;
   height: 44px;
   background-size: .75em;
 }
 
-/* Foco siempre visible al navegar con teclado */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible {
@@ -125,7 +121,6 @@ input:focus-visible {
   background-color: var(--pp-oscuro);
   color: #fff;
 }
-
 
 /* ============ 03. CARRUSEL ============ */
 
@@ -166,7 +161,6 @@ input:focus-visible {
   font-size: clamp(1.25rem, 3.2vw, 2.25rem);
 }
 
-
 /* ============ 04. TARJETAS DE PRODUCTO ============ */
 
 .producto-card {
@@ -196,7 +190,6 @@ input:focus-visible {
   text-decoration: line-through;
 }
 
-/* Cinta de descuento sobre la portada */
 .producto-cinta {
   position: absolute;
   top: .75rem;
@@ -205,7 +198,6 @@ input:focus-visible {
   font-size: .72rem;
   letter-spacing: .5px;
 }
-
 
 /* ============ 05. CARRITO ============ */
 
@@ -225,16 +217,14 @@ input:focus-visible {
   background-color: var(--pp-oscuro);
 }
 
-/* Estado vacío del carrito */
 .carrito-vacio {
   border: 2px dashed rgba(255, 255, 255, .25);
   border-radius: .5rem;
 }
 
-
 /* ============ 06. ESTADOS DE CARGA Y ERROR ============ */
 
-/* Esqueletos mostrados mientras la Fetch API resuelve la promesa */
+/* Se muestran mientras la promesa de fetch sigue pendiente */
 .esqueleto {
   background: linear-gradient(90deg, #e9ecef 25%, #f8f9fa 37%, #e9ecef 63%);
   background-size: 400% 100%;
@@ -250,7 +240,6 @@ input:focus-visible {
 .esqueleto-img {
   aspect-ratio: 400 / 260;
 }
-
 
 /* ============ 07. AJUSTES RESPONSIVOS ============ */
 

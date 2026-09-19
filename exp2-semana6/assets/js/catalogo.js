@@ -1,11 +1,4 @@
-/* =====================================================================
-   catalogo.js - Render del catálogo, filtros y buscador
-   PixelPlay Store | Sumativa Semana 6 - PFY2201
-
-   Recibe los productos ya validados por datos.js y se encarga de pintarlos
-   como tarjetas de Bootstrap, aplicar el filtro por categoría y resolver
-   la búsqueda enviada desde el formulario de la barra de navegación.
-   ===================================================================== */
+/* catalogo.js - Render del catálogo, filtros por categoría y buscador. */
 
 window.PP = window.PP || {};
 
@@ -14,7 +7,6 @@ PP.catalogo = (function () {
 
   const u = PP.utilidades;
 
-  // Estado de la vista: productos cargados y criterios activos
   let productos = [];
   let categoriaActiva = 'todos';
   let terminoBusqueda = '';
@@ -23,7 +15,6 @@ PP.catalogo = (function () {
 
   /* ---------- Plantillas ---------- */
 
-  /** Tarjeta de Bootstrap para un producto. */
   function plantillaTarjeta(producto) {
     const descuento = u.calcularDescuento(producto.precio, producto.precioAnterior);
     const sinStock = Number(producto.stock) === 0;
@@ -83,10 +74,7 @@ PP.catalogo = (function () {
 
   /* ---------- Filtrado ---------- */
 
-  /**
-   * Aplica en cadena el filtro de categoría y el término de búsqueda.
-   * La búsqueda ignora mayúsculas y acentos para ser tolerante al tipeo.
-   */
+  /** Encadena el filtro de categoría con el término de búsqueda. */
   function filtrar() {
     const termino = normalizar(terminoBusqueda);
 
@@ -115,7 +103,6 @@ PP.catalogo = (function () {
 
   /* ---------- Render ---------- */
 
-  /** Pinta la cuadrícula según los filtros activos y actualiza el resumen. */
   function render() {
     const visibles = filtrar();
 
@@ -150,11 +137,9 @@ PP.catalogo = (function () {
     actualizarResumen(visibles.length);
   }
 
-  /** Texto bajo el título del catálogo con el conteo de productos visibles. */
   function actualizarResumen(cantidad) {
     if (!refs.resumen) return;
 
-    // Cada texto incluye su propia preposición para que la frase concuerde
     const nombreCategoria = {
       todos: 'del catálogo completo',
       juegos: 'de la categoría Videojuegos',
@@ -166,7 +151,6 @@ PP.catalogo = (function () {
       : 'Mostrando ' + cantidad + (cantidad === 1 ? ' producto ' : ' productos ') + nombreCategoria + '.';
   }
 
-  /** Marca visualmente el botón de la categoría seleccionada. */
   function marcarFiltroActivo() {
     if (!refs.filtros) return;
     u.$$('[data-categoria]', refs.filtros).forEach(function (boton) {
@@ -177,20 +161,17 @@ PP.catalogo = (function () {
 
   /* ---------- Acciones publicas ---------- */
 
-  /** Cambia la categoría activa y vuelve a pintar. */
   function filtrarPorCategoria(categoria) {
     categoriaActiva = categoria || 'todos';
     marcarFiltroActivo();
     render();
   }
 
-  /** Aplica un término de búsqueda sobre el catálogo. */
   function buscar(termino) {
     terminoBusqueda = String(termino || '').trim();
     render();
   }
 
-  /** Vuelve al estado inicial: catálogo completo y sin búsqueda. */
   function reiniciarFiltros() {
     terminoBusqueda = '';
     categoriaActiva = 'todos';
@@ -202,13 +183,11 @@ PP.catalogo = (function () {
     render();
   }
 
-  /** Muestra los esqueletos de carga antes de resolver la peticion. */
   function mostrarCargando() {
     refs.grid.innerHTML = plantillaEsqueletos(6);
     if (refs.resumen) refs.resumen.textContent = 'Cargando el catálogo desde ' + PP.datos.RUTA_JSON + '...';
   }
 
-  /** Recibe los productos descargados y pinta el catálogo. */
   function establecerProductos(lista) {
     productos = lista;
     reiniciarFiltros();
@@ -217,8 +196,7 @@ PP.catalogo = (function () {
   /* ---------- Eventos ---------- */
 
   function registrarEventos() {
-    // Evento click: agregar al carrito. Un solo listener sobre la cuadrícula
-    // atiende todas las tarjetas, incluidas las que se creen después.
+    // Delegación: un listener cubre las tarjetas que se creen después
     refs.grid.addEventListener('click', function (evento) {
       const boton = evento.target.closest('[data-accion="agregar"]');
       if (!boton) return;
@@ -232,7 +210,6 @@ PP.catalogo = (function () {
       }
     });
 
-    // Evento click: filtros por categoría
     if (refs.filtros) {
       refs.filtros.addEventListener('click', function (evento) {
         const boton = evento.target.closest('[data-categoria]');
@@ -257,13 +234,11 @@ PP.catalogo = (function () {
         refs.inputBusqueda.classList.remove('is-invalid');
         buscar(valor);
 
-        // Lleva la vista al catálogo para que el usuario vea el resultado
         const seccion = u.$('#catalogo');
         if (seccion) seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     }
 
-    // Los enlaces de categoría de la barra de navegación también filtran
     u.$$('.navbar [data-categoria], .carousel [data-categoria]').forEach(function (enlace) {
       enlace.addEventListener('click', function () {
         filtrarPorCategoria(enlace.dataset.categoria);
@@ -271,7 +246,6 @@ PP.catalogo = (function () {
     });
   }
 
-  /** Resuelve referencias del DOM y engancha los eventos del catálogo. */
   function iniciar() {
     refs = {
       grid: u.$('#gridProductos'),

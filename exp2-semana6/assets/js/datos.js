@@ -1,11 +1,4 @@
-/* =====================================================================
-   datos.js - Acceso a datos con la Fetch API
-   PixelPlay Store | Sumativa Semana 6 - PFY2201
-
-   Único módulo que habla con el exterior. Encapsula la petición al JSON
-   local, la validación de la respuesta y la clasificación de errores, de
-   modo que el resto de la aplicación solo reciba productos ya validados.
-   ===================================================================== */
+/* datos.js - Carga del catálogo con la Fetch API y clasificación de errores. */
 
 window.PP = window.PP || {};
 
@@ -42,10 +35,7 @@ PP.datos = (function () {
     }
   ];
 
-  /**
-   * Comprueba que cada registro traiga los campos que la interfaz necesita.
-   * Un JSON bien formado pero incompleto también es un error de datos.
-   */
+  /** Un JSON bien formado pero incompleto también es un error de datos. */
   function validarProductos(lista) {
     if (!Array.isArray(lista) || lista.length === 0) {
       throw new Error('DATOS_VACIOS');
@@ -66,11 +56,8 @@ PP.datos = (function () {
     return validos;
   }
 
-  /**
-   * Traduce cualquier fallo a un mensaje comprensible para el usuario.
-   * Distingue el caso file:// porque es el error más frecuente al abrir
-   * el proyecto sin un servidor local.
-   */
+  /** Traduce cada fallo a un mensaje para el usuario. El caso file:// va
+      primero porque es el más frecuente al abrir el proyecto sin servidor. */
   function describirError(error) {
     const esFile = window.location.protocol === 'file:';
 
@@ -118,11 +105,8 @@ PP.datos = (function () {
     };
   }
 
-  /**
-   * Descarga el catálogo con la Fetch API.
-   * Devuelve una promesa que resuelve con el arreglo de productos validados
-   * o que se rechaza con un error ya clasificado.
-   */
+  /** Devuelve una promesa con los productos validados, o rechazada con un
+      error ya clasificado. */
   function obtenerProductos() {
     // AbortController evita que la promesa quede pendiente para siempre
     // si el servidor nunca responde.

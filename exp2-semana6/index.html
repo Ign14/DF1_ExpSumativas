@@ -9,19 +9,18 @@
 
   <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
 
-  <!-- Bootstrap 5.3 desde CDN, con integridad verificada -->
+  <!-- Bootstrap 5.3.3 desde CDN, con hash de integridad -->
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
     crossorigin="anonymous">
 
-  <!-- Estilos propios: se cargan después de Bootstrap para poder sobrescribirlo -->
+  <!-- Va después de Bootstrap para poder sobrescribirlo -->
   <link rel="stylesheet" href="assets/css/estilos.css">
 </head>
 <body class="bg-body-tertiary">
 
-  <!-- Enlace de salto para navegación por teclado -->
   <a class="skip-link visually-hidden-focusable" href="#contenido">Saltar al contenido principal</a>
 
   <!-- ==================== BARRA DE NAVEGACIÓN ==================== -->
@@ -34,7 +33,6 @@
           <span class="fw-bold">PixelPlay <span class="text-info">Store</span></span>
         </a>
 
-        <!-- Botón hamburguesa: colapsa la navegación en pantallas pequeñas -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#menuPrincipal" aria-controls="menuPrincipal"
                 aria-expanded="false" aria-label="Abrir o cerrar el menú de navegación">
@@ -48,12 +46,10 @@
               <a class="nav-link active" aria-current="page" href="#inicio">Inicio</a>
             </li>
 
-            <!-- Categoría simulada 1 -->
             <li class="nav-item">
               <a class="nav-link" href="#catalogo" data-categoria="juegos">Videojuegos</a>
             </li>
 
-            <!-- Categoría simulada 2 -->
             <li class="nav-item">
               <a class="nav-link" href="#catalogo" data-categoria="accesorios">Accesorios</a>
             </li>
@@ -70,7 +66,6 @@
             </li>
           </ul>
 
-          <!-- Formulario de búsqueda: dispara el evento submit -->
           <form class="d-flex me-lg-3 mb-2 mb-lg-0" id="formBusqueda" role="search" novalidate>
             <label class="visually-hidden" for="inputBusqueda">Buscar productos</label>
             <input class="form-control form-control-sm me-2" type="search" id="inputBusqueda"
@@ -79,7 +74,6 @@
             <button class="btn btn-sm btn-outline-info flex-shrink-0" type="submit">Buscar</button>
           </form>
 
-          <!-- Botón del carrito con contador dinámico -->
           <a href="#carrito" class="btn btn-sm btn-info position-relative d-inline-flex align-items-center gap-2">
             Carrito
             <span class="badge rounded-pill text-bg-dark" id="contadorCarrito" aria-live="polite">0</span>
@@ -154,7 +148,6 @@
           </p>
         </div>
 
-        <!-- Filtros por categoría: disparan eventos click -->
         <div class="col-lg-5">
           <div class="btn-group w-100" role="group" aria-label="Filtrar productos por categoría" id="filtrosCategoria">
             <button type="button" class="btn btn-outline-dark active" data-categoria="todos">Todos</button>
@@ -164,10 +157,9 @@
         </div>
       </div>
 
-      <!-- Zona de avisos: estados de carga, error y resultados de búsqueda -->
       <div id="zonaAvisos" role="status" aria-live="polite"></div>
 
-      <!-- Cuadrícula de tarjetas: se rellena dinámicamente con JavaScript -->
+      <!-- La rellena catalogo.js -->
       <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4" id="gridProductos"></div>
 
     </section>
@@ -180,7 +172,6 @@
           <div class="col-lg-8">
             <h2 class="h3 fw-bold mb-3">Resumen de tu carrito</h2>
 
-            <!-- Área designada donde JavaScript inyecta el detalle del carrito -->
             <div id="detalleCarrito" aria-live="polite"></div>
           </div>
 
@@ -290,16 +281,15 @@
     </div>
   </footer>
 
-  <!-- Contenedor de notificaciones emergentes (toasts de Bootstrap) -->
   <div class="toast-container position-fixed bottom-0 end-0 p-3" id="zonaToasts"></div>
 
-  <!-- Bootstrap: bundle con Popper, necesario para navbar, dropdown, carrusel y toasts -->
+  <!-- Bundle con Popper: lo necesitan dropdown, carrusel y toasts -->
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
 
-  <!-- Módulos propios. El orden importa: utilidades, datos, carrito, catálogo y orquestador -->
+  <!-- El orden importa: cada módulo usa los anteriores -->
   <script src="assets/js/utilidades.js"></script>
   <script src="assets/js/datos.js"></script>
   <script src="assets/js/carrito.js"></script>
