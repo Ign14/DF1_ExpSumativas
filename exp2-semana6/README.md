@@ -53,7 +53,7 @@ exp2-semana6/
 | 3. Manipulación del DOM (15 pts) | Las tarjetas y las líneas del carrito se generan por completo desde JavaScript; el resumen, el contador y los totales se reescriben en cada cambio | `assets/js/catalogo.js` · `assets/js/carrito.js` |
 | 4. Gestión de eventos (15 pts) | `click` para agregar, sumar, quitar, eliminar y filtrar; `submit` para el buscador con validación. Delegación de eventos en los contenedores | `assets/js/catalogo.js` · `assets/js/carrito.js` |
 | 5. Fetch API (10 pts) | `fetch()` sobre `assets/data/productos.json` con `AbortController`, verificación de `response.ok` y validación de los registros recibidos | `assets/js/datos.js` |
-| 6. Validaciones y gestión de errores (10 pts) | Cinco escenarios cubiertos con mensaje amigable, botón de reintento y catálogo de respaldo | `assets/js/datos.js` · `assets/js/app.js` |
+| 6. Validaciones y gestión de errores (10 pts) | Siete escenarios cubiertos con mensaje amigable, botón de reintento y catálogo de respaldo | `assets/js/datos.js` · `assets/js/app.js` |
 | 7. Organización del código (10 pts) | Cinco módulos con una responsabilidad cada uno, patrón IIFE con API pública y comentarios en cada función | `assets/js/` |
 | 8. Publicación en GitHub (10 pts) | Repositorio documentado con capturas y despliegue en `gh-pages` | Este README |
 
@@ -81,14 +81,17 @@ return fetch(RUTA_JSON, { cache: 'no-store', signal: controlador.signal })
 
 | Escenario | Mensaje mostrado al usuario |
 |---|---|
-| Respuesta HTTP distinta de 200 | «El servidor respondió con el estado HTTP 404 Not Found» |
+| Respuesta 404 o 500 | «El servidor respondió con el estado HTTP 404 Not Found» |
+| JSON malformado | «No pudimos cargar el catálogo» |
 | JSON sin productos | «El catálogo llegó vacío» |
 | Registros sin los campos mínimos | «Los datos del catálogo no tienen el formato esperado» |
 | Sin respuesta en 8 segundos | «La carga del catálogo tardó demasiado» |
+| Conexión caída | «Ocurrió un problema al conectarse con el servidor» |
 | Página abierta con `file://` | Explica que el navegador bloquea `fetch` en archivos locales e indica cómo levantar un servidor |
 
-En todos los casos se ofrecen dos salidas: **Reintentar** y **Ver catálogo de demostración**
-(datos de respaldo embebidos, claramente rotulados como tales).
+En los siete casos se ofrecen dos salidas: **Reintentar** y **Ver catálogo de demostración**
+(datos de respaldo embebidos, claramente rotulados como tales). El reintento vuelve a pedir
+el JSON y limpia el aviso de error si la segunda petición sí responde.
 
 ### Eventos implementados
 
@@ -147,7 +150,10 @@ También funciona directamente en la URL publicada en GitHub Pages.
 | Desbordamiento horizontal | 320 a 1920 px en los tres motores, sin scroll lateral |
 | Flujo del carrito | Agregar, sumar, quitar, eliminar y vaciar, con totales verificados |
 | Buscador | Con resultados, sin resultados y con validación de término corto |
-| Rutas de error de Fetch | 404, JSON vacío, datos inválidos y red caída |
+| Rutas de error de Fetch | 404, 500, JSON malformado, vacío, datos inválidos, red caída y tiempo agotado |
+| Reintento tras fallo | La segunda petición carga el catálogo y retira el aviso |
+| Objetivos táctiles | Ningún control accionable bajo 44 px en móvil |
+| Tope de stock | «Última Órbita» (stock 6) no supera las 6 unidades en el carrito |
 
 ---
 
@@ -156,7 +162,10 @@ También funciona directamente en la URL publicada en GitHub Pages.
 - Enlace «Saltar al contenido principal» y foco visible en todos los controles.
 - `aria-label` en la navegación, los botones del carrito y el carrusel.
 - Regiones `aria-live` en el contador, el resumen del carrito y la zona de avisos.
-- Objetivo táctil mínimo de 44 px en navegación, filtros y controles del carrito.
+- Objetivo táctil mínimo de 44 px (WCAG 2.5.8) en todos los botones, enlaces de
+  navegación y pie, campos del formulario y controles del carrito. Los indicadores
+  del carrusel se ampliaron de 23 a 27 px. Quedan fuera los enlaces de teléfono y
+  correo, que van en línea dentro de un párrafo y el criterio exceptúa.
 - Imágenes decorativas con `alt` vacío; las informativas, con texto descriptivo.
 - Soporte de `prefers-reduced-motion`.
 

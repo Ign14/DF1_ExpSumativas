@@ -65,22 +65,46 @@ body {
 
 /* ============ 02. ACCESIBILIDAD ============ */
 
-/* Objetivo táctil mínimo de 44 px en los controles principales */
+/* Objetivo táctil mínimo de 44 px (WCAG 2.5.8) en todos los controles
+   accionables: Bootstrap deja los botones en 38 px y los .btn-sm en 31 px */
 .navbar .nav-link,
+.navbar-toggler,
+.btn,
 .btn-group .btn,
-#detalleCarrito .btn {
+#detalleCarrito .btn,
+.site-footer .nav-link,
+footer .nav-link {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
 }
 
-.navbar .nav-link {
+.navbar .nav-link,
+footer .nav-link {
   justify-content: flex-start;
 }
 
+.btn,
 .btn-group .btn,
-#detalleCarrito .btn {
+#detalleCarrito .btn,
+.navbar-toggler {
   justify-content: center;
+}
+
+/* Bootstrap deja los indicadores del carrusel en 23 px de alto (3 px de barra
+   mas 10 px de borde transparente a cada lado), justo bajo el minimo de 24 px.
+   Se ensancha el borde transparente: el area sensible crece y la barra
+   visible no cambia */
+.carousel-indicators [data-bs-target] {
+  border-top-width: 12px;
+  border-bottom-width: 12px;
+}
+
+/* El boton de cierre de los toasts tambien debe ser alcanzable con el pulgar */
+.toast .btn-close {
+  width: 44px;
+  height: 44px;
+  background-size: .75em;
 }
 
 /* Foco siempre visible al navegar con teclado */
@@ -94,6 +118,9 @@ input:focus-visible {
 .skip-link {
   position: absolute;
   z-index: 1080;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   padding: .5rem 1rem;
   background-color: var(--pp-oscuro);
   color: #fff;
@@ -121,6 +148,18 @@ input:focus-visible {
   right: 10%;
   left: 10%;
   bottom: 1.5rem;
+  /* El bloque de texto se solapa con la franja de indicadores: se deja pasar
+     el clic salvo en sus propios enlaces y botones */
+  pointer-events: none;
+}
+
+.carousel-caption a,
+.carousel-caption button {
+  pointer-events: auto;
+}
+
+.carousel-indicators {
+  z-index: 3;
 }
 
 .carousel-caption h2 {
