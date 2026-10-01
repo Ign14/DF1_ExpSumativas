@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" role="img" aria-label="Portada ilustrada del videojuego Reinos de Aether">
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f2130"/>
+      <stop offset="100%" stop-color="#4dc9ff" stop-opacity="0.6"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="260" fill="url(#g2)"/>
+  <circle cx="318" cy="76" r="46" fill="#ffcc4d" opacity="0.35"/>
+  <circle cx="292" cy="104" r="22" fill="#4dc9ff" opacity="0.55"/>
+  <g opacity="0.9">
+    <rect x="34" y="176" width="26" height="26" fill="#4dc9ff"/>
+    <rect x="66" y="202" width="26" height="26" fill="#ffcc4d" opacity="0.85"/>
+    <rect x="98" y="176" width="26" height="26" fill="#4dc9ff" opacity="0.6"/>
+    <rect x="130" y="150" width="26" height="26" fill="#ffcc4d" opacity="0.45"/>
+  </g>
+  <g opacity="0.75">
+    <rect x="24" y="24" width="10" height="10" fill="#ffcc4d"/>
+    <rect x="40" y="24" width="10" height="10" fill="#ffcc4d" opacity="0.6"/>
+    <rect x="24" y="40" width="10" height="10" fill="#ffcc4d" opacity="0.4"/>
+  </g>
+  <rect id="watermark-chip" x="16" y="224" width="102" height="22" rx="11" fill="#0b0a17" opacity="0.5"/>
+  <text x="26" y="239" font-family="Verdana,Geneva,sans-serif" font-size="11" letter-spacing="2" fill="#ffffff" opacity="0.95">PIXELPLAY</text>
+</svg>

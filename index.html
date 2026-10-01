@@ -71,6 +71,10 @@
       .rejilla { grid-template-columns: repeat(2, 1fr); }
     }
 
+    @media (min-width: 1040px) {
+      .rejilla { grid-template-columns: repeat(3, 1fr); }
+    }
+
     .tarjeta {
       display: flex;
       flex-direction: column;
@@ -83,6 +87,7 @@
     }
 
     .tarjeta:nth-child(2) { border-top-color: var(--acento); }
+    .tarjeta:nth-child(3) { border-top-color: #e0a800; }
 
     .tarjeta h2 {
       margin: 0 0 .25rem;
@@ -223,6 +228,26 @@
         <div class="acciones">
           <a class="boton boton--solido" href="exp2-semana6/">Ver el sitio</a>
           <a class="boton boton--linea" href="https://github.com/Ign14/DF1_ExpSumativas/tree/main/exp2-semana6">C&oacute;digo</a>
+        </div>
+      </article>
+
+      <article class="tarjeta">
+        <span class="etiqueta">Experiencia 3 &middot; Semanas 7 y 8</span>
+        <h2>PixelPlay Store &mdash; React</h2>
+        <p>
+          La misma tienda reescrita con componentes funcionales de React: el cat&aacute;logo se
+          carga con useEffect, el carrito y los filtros viven en useState, y la interfaz
+          cambia seg&uacute;n el estado mediante renderizado condicional.
+        </p>
+        <ul class="tecnologias">
+          <li>React 18</li>
+          <li>Vite</li>
+          <li>Hooks</li>
+          <li>Renderizado condicional</li>
+        </ul>
+        <div class="acciones">
+          <a class="boton boton--solido" href="exp3-semana8/">Ver el sitio</a>
+          <a class="boton boton--linea" href="https://github.com/Ign14/DF1_ExpSumativas/tree/main/exp3-semana8">C&oacute;digo</a>
         </div>
       </article>
 
