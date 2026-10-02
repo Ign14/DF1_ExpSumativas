@@ -19,6 +19,9 @@ function describirError(e) {
   if (e.message === 'El catálogo llegó vacío.') {
     return 'El archivo de productos se descargó, pero no contiene ningún registro.';
   }
+  if (e instanceof SyntaxError) {
+    return 'El archivo de productos llegó dañado y no se pudo interpretar.';
+  }
   return 'Ocurrió un problema al conectarse con el servidor. Inténtalo nuevamente en unos segundos.';
 }
 

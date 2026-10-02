@@ -3,31 +3,44 @@ import Encabezado from './components/Encabezado.jsx';
 import Filtros from './components/Filtros.jsx';
 import Catalogo from './components/Catalogo.jsx';
 import Carrito from './components/Carrito.jsx';
+import { normalizar } from './data/formato.js';
 import { useProductos } from './hooks/useProductos.jsx';
 import { useCarrito } from './hooks/useCarrito.jsx';
 
 export default function App() {
+  // Los dos hooks propios concentran la lógica: App solo compone la vista
   const { productos, cargando, error, reintentar } = useProductos();
   const carrito = useCarrito();
 
+  // Estado de los filtros. Vive aquí porque lo comparten Filtros y Catalogo
   const [categoria, setCategoria] = useState('todos');
   const [soloOfertas, setSoloOfertas] = useState(false);
+  const [busqueda, setBusqueda] = useState('');
   const refCarrito = useRef(null);
 
   // Se recalcula solo cuando cambian los productos o los filtros
+  /* Lista filtrada. Se memoriza para no recalcularla en cada render del
+     carrito, que cambia mucho más seguido que los filtros. */
   const visibles = useMemo(() => {
+    const termino = normalizar(busqueda);
+
     return productos.filter((p) => {
       const coincideCategoria = categoria === 'todos' || p.categoria === categoria;
       const esOferta = p.precioAnterior > p.precio;
-      return coincideCategoria && (!soloOfertas || esOferta);
-    });
-  }, [productos, categoria, soloOfertas]);
+      const texto = normalizar(`${p.nombre} ${p.plataforma} ${p.genero} ${p.descripcion}`);
+      const coincideBusqueda = !termino || texto.includes(termino);
 
+      return coincideCategoria && (!soloOfertas || esOferta) && coincideBusqueda;
+    });
+  }, [productos, categoria, soloOfertas, busqueda]);
+
+  // Cuántas unidades de un producto hay en el carrito; 0 si no está
   const cantidadDe = (id) => carrito.lineas.find((l) => l.producto.id === id)?.cantidad ?? 0;
 
   function limpiarFiltros() {
     setCategoria('todos');
     setSoloOfertas(false);
+    setBusqueda('');
   }
 
   function irAlCarrito() {
@@ -65,6 +78,8 @@ export default function App() {
             onCategoria={setCategoria}
             soloOfertas={soloOfertas}
             onSoloOfertas={setSoloOfertas}
+            busqueda={busqueda}
+            onBuscar={setBusqueda}
           />
 
           <Catalogo

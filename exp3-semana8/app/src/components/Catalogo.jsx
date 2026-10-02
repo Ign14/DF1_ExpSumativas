@@ -2,6 +2,8 @@ import TarjetaProducto from './TarjetaProducto.jsx';
 
 /* Cuadrícula del catálogo. Cubre los tres estados de la carga —cargando,
    error y datos— y el caso de que los filtros no dejen ningún producto. */
+/* Cuatro vistas posibles según el estado de la carga y de los filtros:
+   cargando, error, sin resultados y la cuadrícula con datos. */
 export default function Catalogo({
   productos,
   cargando,

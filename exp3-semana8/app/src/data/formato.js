@@ -13,3 +13,13 @@ export function calcularDescuento(precio, precioNormal) {
   if (!precioNormal || precioNormal <= precio) return 0;
   return Math.round((1 - precio / precioNormal) * 100);
 }
+
+/* Pasa a minúsculas y quita los acentos, de modo que "audifonos" encuentre
+   "Audífonos Surround HX". */
+export function normalizar(texto) {
+  return String(texto || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim();
+}

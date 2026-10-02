@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 
-const DESPACHO = 3990;
-const ENVIO_GRATIS_DESDE = 49990;
+const DESPACHO = 3990;          // Costo de envío estándar
+const ENVIO_GRATIS_DESDE = 49990; // Monto que libera el despacho
 
 /* Estado del carrito y sus operaciones.
    Las líneas son la única fuente de verdad; los totales se derivan con useMemo
@@ -9,6 +9,8 @@ const ENVIO_GRATIS_DESDE = 49990;
 export function useCarrito() {
   const [lineas, setLineas] = useState([]);
 
+  /* Agrega el producto o le suma una unidad si ya estaba, respetando el stock.
+     Devuelve el arreglo nuevo en lugar de mutarlo: React compara por referencia. */
   function agregar(producto) {
     setLineas((actuales) => {
       const existente = actuales.find((l) => l.producto.id === producto.id);
@@ -41,6 +43,8 @@ export function useCarrito() {
     setLineas([]);
   }
 
+  /* Los totales se derivan de las líneas en cada cambio. No se guardan en su
+     propio estado para que no puedan quedar desfasados respecto del carrito. */
   const totales = useMemo(() => {
     const unidades = lineas.reduce((suma, l) => suma + l.cantidad, 0);
     const subtotal = lineas.reduce((suma, l) => suma + l.producto.precio * l.cantidad, 0);

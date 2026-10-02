@@ -44,9 +44,14 @@ Pages sirve la carpeta tal cual está en la rama. Por eso el build queda version
 | `lineas` | `useCarrito` | Productos agregados y su cantidad |
 | `categoria` | `App` | Filtro de categoría activo |
 | `soloOfertas` | `App` | Interruptor que además cambia su propio texto |
+| `busqueda` | `App` | Término del buscador, combinable con los filtros |
 
 Los totales no se guardan: se derivan de `lineas` con `useMemo`, de modo que nunca pueden
-quedar desfasados respecto del carrito.
+quedar desfasados respecto del carrito. La lista visible se memoriza igual, porque los filtros
+cambian mucho menos a menudo que el carrito.
+
+El buscador ignora acentos y mayúsculas: *audifonos* encuentra *Audífonos Surround HX*. Se
+combina con la categoría y con el interruptor de ofertas.
 
 ## Carga de datos con useEffect
 
@@ -58,13 +63,14 @@ si el componente se desmonta antes de que resuelva.
 El efecto depende de `intento`: el botón «Reintentar» incrementa ese contador y vuelve a
 dispararlo sin recargar la página.
 
-Cuatro situaciones dan un mensaje distinto: respuesta HTTP con error, catálogo vacío, tiempo
-agotado y conexión caída. Si el build se abre con doble clic (`file://`), explica que el
+Cinco situaciones dan un mensaje distinto: respuesta HTTP con error, archivo dañado, catálogo
+vacío, tiempo agotado y conexión caída. Si el build se abre con doble clic (`file://`), explica que el
 navegador bloquea la lectura de archivos locales e indica cómo levantar el servidor.
 
 ## Renderizado condicional
 
 - `Catalogo` decide entre cuatro vistas: cargando, error, sin resultados y la cuadrícula.
+  El estado «sin resultados» se alcanza buscando un término que no exista.
 - `Carrito` muestra el mensaje de carrito vacío o el detalle con totales.
 - El botón de cada producto pasa de «Agregar al carrito» a «En el carrito (n)», con otro
   color, y a «Sin más stock (n)» cuando se alcanza el inventario.

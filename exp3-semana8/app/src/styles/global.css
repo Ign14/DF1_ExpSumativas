@@ -304,3 +304,28 @@ button:focus-visible, a:focus-visible {
   .tarjeta, .boton { transition: none; }
   .girador { animation: none; }
 }
+
+.buscador { flex: 1 1 100%; }
+
+.buscador__campo {
+  width: 100%;
+  min-height: 44px;
+  padding: .55rem .9rem;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background: var(--superficie);
+  font: inherit;
+  color: var(--texto);
+}
+
+.buscador__campo:focus { border-color: var(--primario); outline-offset: 1px; }
+
+/* Visible solo para lectores de pantalla */
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

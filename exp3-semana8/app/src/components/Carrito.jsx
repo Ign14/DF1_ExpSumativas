@@ -3,6 +3,7 @@ import { formatearPrecio } from '../data/formato.js';
 /* Resumen del carrito. Con el carrito vacío muestra un mensaje en lugar de
    la tabla; con productos, el detalle y los totales. */
 export default function Carrito({ lineas, totales, onSumar, onQuitar, onEliminar, onVaciar, envioGratisDesde }) {
+  // Con el carrito vacío se muestra un mensaje en lugar del detalle y los totales
   if (lineas.length === 0) {
     return (
       <section className="carrito" id="carrito">

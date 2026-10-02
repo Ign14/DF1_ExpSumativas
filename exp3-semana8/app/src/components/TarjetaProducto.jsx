@@ -3,6 +3,7 @@ import { formatearPrecio, calcularDescuento } from '../data/formato.js';
 /* Tarjeta de producto. El botón alterna entre "Agregar al carrito" y
    "En el carrito" según si el producto ya fue agregado. */
 export default function TarjetaProducto({ producto, enCarrito, cantidad, onAgregar }) {
+  // El botón tiene tres estados: disponible, ya agregado y sin stock
   const descuento = calcularDescuento(producto.precio, producto.precioAnterior);
   const sinStock = producto.stock === 0;
   const topeAlcanzado = cantidad >= producto.stock;
