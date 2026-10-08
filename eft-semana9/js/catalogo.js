@@ -33,37 +33,39 @@
     columna.className = 'col';
 
     const articulo = document.createElement('article');
-    articulo.className = 'tarjeta-juego';
+    articulo.className = 'card tarjeta-juego';
     articulo.dataset.id = String(juego.id);
 
     const portada = document.createElement('img');
     portada.src = juego.imagen;
     portada.alt = 'Portada de ' + juego.nombre;
+    portada.className = 'card-img-top';
     portada.loading = 'lazy';
     portada.width = 400;
     portada.height = 260;
 
     const cuerpo = document.createElement('div');
-    cuerpo.className = 'cuerpo-tarjeta';
+    cuerpo.className = 'card-body cuerpo-tarjeta';
 
     const titulo = document.createElement('h3');
+    titulo.className = 'card-title';
     titulo.textContent = juego.nombre;
 
     const meta = document.createElement('div');
     meta.className = 'meta-tarjeta';
 
     const categoria = document.createElement('span');
-    categoria.className = 'insignia';
+    categoria.className = 'badge insignia';
     categoria.textContent = juego.categoria;
 
     const plataforma = document.createElement('span');
-    plataforma.className = 'insignia insignia--plataforma';
+    plataforma.className = 'badge insignia insignia--plataforma';
     plataforma.textContent = juego.plataforma;
 
     meta.append(categoria, plataforma);
 
     const descripcion = document.createElement('p');
-    descripcion.className = 'descripcion-tarjeta';
+    descripcion.className = 'card-text descripcion-tarjeta';
     descripcion.textContent = juego.descripcion;
 
     const pie = document.createElement('div');
