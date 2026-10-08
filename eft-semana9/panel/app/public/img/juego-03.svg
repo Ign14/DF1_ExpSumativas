@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" role="img" aria-label="Portada ilustrada del videojuego Garra de Hierro">
+  <defs>
+    <linearGradient id="f3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2a0f12"/>
+      <stop offset="100%" stop-color="#ff7a3d" stop-opacity="0.55"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="260" fill="url(#f3)"/>
+  <rect x="292" y="92" width="80" height="12" rx="6" fill="#ff7a3d" opacity="0.55" transform="rotate(0 292 98)"/>
+  <rect x="292" y="92" width="80" height="12" rx="6" fill="#ff7a3d" opacity="0.55" transform="rotate(45 292 98)"/>
+  <rect x="292" y="92" width="80" height="12" rx="6" fill="#ff7a3d" opacity="0.55" transform="rotate(90 292 98)"/>
+  <rect x="292" y="92" width="80" height="12" rx="6" fill="#ff7a3d" opacity="0.55" transform="rotate(135 292 98)"/>
+  <rect x="292" y="92" width="80" height="12" rx="6" fill="#ff7a3d" opacity="0.55" transform="rotate(180 292 98)"/>
+  <rect x="292" y="92" width="80" height="12" rx="6" fill="#ff7a3d" opacity="0.55" transform="rotate(225 292 98)"/>
+  <rect x="292" y="92" width="80" height="12" rx="6" fill="#ff7a3d" opacity="0.55" transform="rotate(270 292 98)"/>
+  <rect x="292" y="92" width="80" height="12" rx="6" fill="#ff7a3d" opacity="0.55" transform="rotate(315 292 98)"/>
+  <circle cx="292" cy="98" r="18" fill="#ffd166" opacity="0.9"/>
+  <path d="M20 214 L96 150 L150 196 L206 132 L250 214 Z" fill="#ffd166" opacity="0.3"/>
+  <rect x="16" y="224" width="102" height="22" rx="11" fill="#07060f" opacity="0.55"/>
+  <text x="26" y="239" font-family="Verdana,Geneva,sans-serif" font-size="11" letter-spacing="2" fill="#ffffff" opacity="0.95">PIXELPLAY</text>
+</svg>

@@ -1,0 +1,21 @@
+{
+  "name": "pixelplay-panel-react",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Version React del catalogo de PixelPlay Store (EFT Semana 9, PFY2201)",
+  "type": "module",
+  "scripts": {
+    "sincronizar": "node scripts/sincronizar-datos.js",
+    "dev": "npm run sincronizar && vite",
+    "build": "npm run sincronizar && vite build && node scripts/publicar.js",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.11"
+  }
+}

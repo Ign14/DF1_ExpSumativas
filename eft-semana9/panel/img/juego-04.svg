@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" role="img" aria-label="Portada ilustrada del videojuego Última Órbita">
+  <defs>
+    <linearGradient id="f4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1026"/>
+      <stop offset="100%" stop-color="#7c5cff" stop-opacity="0.55"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="260" fill="url(#f4)"/>
+  <circle cx="300" cy="92" r="34" fill="#54e0ff" opacity="0.85"/>
+  <ellipse cx="300" cy="92" rx="96" ry="34" fill="none" stroke="#7c5cff" stroke-width="3" opacity="0.7" transform="rotate(-18 300 92)"/>
+  <ellipse cx="300" cy="92" rx="132" ry="46" fill="none" stroke="#7c5cff" stroke-width="3" opacity="0.7" transform="rotate(14 300 92)"/>
+  <ellipse cx="300" cy="92" rx="68" ry="22" fill="none" stroke="#7c5cff" stroke-width="3" opacity="0.7" transform="rotate(42 300 92)"/>
+  <rect x="108" y="108" width="3" height="3" fill="#ffffff" opacity="0.45"/>
+  <rect x="60" y="193" width="3" height="3" fill="#ffffff" opacity="0.30"/>
+  <rect x="74" y="71" width="3" height="3" fill="#ffffff" opacity="0.45"/>
+  <rect x="122" y="71" width="3" height="3" fill="#ffffff" opacity="0.67"/>
+  <rect x="176" y="185" width="3" height="3" fill="#ffffff" opacity="0.29"/>
+  <rect x="64" y="57" width="3" height="3" fill="#ffffff" opacity="0.69"/>
+  <rect x="92" y="149" width="3" height="3" fill="#ffffff" opacity="0.65"/>
+  <rect x="37" y="90" width="3" height="3" fill="#ffffff" opacity="0.77"/>
+  <rect x="100" y="115" width="3" height="3" fill="#ffffff" opacity="0.67"/>
+  <rect x="16" y="106" width="3" height="3" fill="#ffffff" opacity="0.28"/>
+  <rect x="16" y="53" width="3" height="3" fill="#ffffff" opacity="0.77"/>
+  <rect x="76" y="113" width="3" height="3" fill="#ffffff" opacity="0.32"/>
+  <rect x="199" y="88" width="3" height="3" fill="#ffffff" opacity="0.45"/>
+  <rect x="150" y="139" width="3" height="3" fill="#ffffff" opacity="0.58"/>
+  <rect x="134" y="27" width="3" height="3" fill="#ffffff" opacity="0.79"/>
+  <rect x="156" y="192" width="3" height="3" fill="#ffffff" opacity="0.59"/>
+  <rect x="89" y="23" width="3" height="3" fill="#ffffff" opacity="0.66"/>
+  <rect x="64" y="99" width="3" height="3" fill="#ffffff" opacity="0.41"/>
+  <rect x="99" y="39" width="3" height="3" fill="#ffffff" opacity="0.50"/>
+  <rect x="115" y="86" width="3" height="3" fill="#ffffff" opacity="0.47"/>
+  <rect x="65" y="203" width="3" height="3" fill="#ffffff" opacity="0.48"/>
+  <rect x="183" y="21" width="3" height="3" fill="#ffffff" opacity="0.79"/>
+  <rect x="16" y="224" width="102" height="22" rx="11" fill="#07060f" opacity="0.55"/>
+  <text x="26" y="239" font-family="Verdana,Geneva,sans-serif" font-size="11" letter-spacing="2" fill="#ffffff" opacity="0.95">PIXELPLAY</text>
+</svg>
