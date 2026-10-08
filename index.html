@@ -166,11 +166,11 @@
       text-decoration: none;
     }
 
-    .destacada {
+    .tarjeta.destacada {
       margin-bottom: 1.5rem;
       border-top-color: #e0a800;
       background:
-        linear-gradient(135deg, rgba(91, 61, 245, .06) 0%, rgba(18, 128, 92, .06) 100%),
+        linear-gradient(135deg, rgba(91, 61, 245, .07) 0%, rgba(224, 168, 0, .07) 100%),
         var(--superficie);
     }
 
@@ -181,14 +181,7 @@
 
     .destacada h2 { font-size: 1.45rem; }
 
-    @media (min-width: 720px) {
-      .destacada .columnas {
-        display: grid;
-        grid-template-columns: 1.4fr 1fr;
-        gap: 1.5rem;
-        align-items: start;
-      }
-    }
+    .destacada > p { max-width: 68ch; }
 
     .pie {
       padding: 1.5rem;
@@ -217,28 +210,24 @@
     <article class="tarjeta destacada">
       <span class="etiqueta">Evaluaci&oacute;n Final Transversal &middot; Semana 9</span>
       <h2>PixelPlay Store &mdash; Tienda completa y versi&oacute;n React</h2>
-      <div class="columnas">
-        <div>
-          <p>
-            Tienda de videojuegos con cat&aacute;logo filtrable por categor&iacute;a y formulario de
-            contacto validado, construida con HTML5 sem&aacute;ntico, CSS3, Bootstrap 5 y JavaScript
-            sin frameworks. La misma interfaz se entrega adem&aacute;s reescrita en componentes
-            funcionales de React, con alta y baja de videojuegos sobre el estado.
-          </p>
-          <ul class="tecnologias">
-            <li>HTML5</li>
-            <li>CSS3</li>
-            <li>Bootstrap 5</li>
-            <li>JavaScript</li>
-            <li>React 18</li>
-            <li>Vite</li>
-          </ul>
-        </div>
-        <div class="acciones">
-          <a class="boton boton--solido" href="eft-semana9/">Ver la tienda</a>
-          <a class="boton boton--linea" href="eft-semana9/panel/">Versi&oacute;n React</a>
-          <a class="boton boton--linea" href="https://github.com/Ign14/DF1_ExpSumativas/tree/main/eft-semana9">C&oacute;digo</a>
-        </div>
+      <p>
+        Tienda de videojuegos con cat&aacute;logo filtrable por categor&iacute;a y formulario de
+        contacto validado, construida con HTML5 sem&aacute;ntico, CSS3, Bootstrap 5 y JavaScript sin
+        frameworks. La misma interfaz se entrega adem&aacute;s reescrita en componentes funcionales
+        de React, con alta y baja de videojuegos sobre el estado.
+      </p>
+      <ul class="tecnologias">
+        <li>HTML5</li>
+        <li>CSS3</li>
+        <li>Bootstrap 5</li>
+        <li>JavaScript</li>
+        <li>React 18</li>
+        <li>Vite</li>
+      </ul>
+      <div class="acciones">
+        <a class="boton boton--solido" href="eft-semana9/">Ver la tienda</a>
+        <a class="boton boton--linea" href="eft-semana9/panel/">Versi&oacute;n React</a>
+        <a class="boton boton--linea" href="https://github.com/Ign14/DF1_ExpSumativas/tree/main/eft-semana9">C&oacute;digo</a>
       </div>
     </article>
 
