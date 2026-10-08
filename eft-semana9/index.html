@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PixelPlay Store: tienda en línea de videojuegos con catálogo filtrable por categoría y formulario de contacto. Evaluación Final Transversal de Desarrollo Frontend I (PFY2201), Duoc UC.">
+  <meta name="author" content="Ignacio Miño Astorga">
+  <title>PixelPlay Store | Videojuegos en línea</title>
+
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <a class="salto-contenido" href="#contenido">Saltar al contenido principal</a>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark barra-principal sticky-top" aria-label="Navegación principal">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#inicio">
+          <img src="img/logo.svg" alt="" width="36" height="36">
+          <span class="fw-bold">PixelPlay <span class="text-pixel">Store</span></span>
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#menuPrincipal"
+          aria-controls="menuPrincipal"
+          aria-expanded="false"
+          aria-label="Mostrar u ocultar el menú de navegación">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menuPrincipal">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+            <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="#catalogo">Catálogo</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+            <li class="nav-item">
+              <a class="nav-link enlace-panel" href="panel/">Panel React</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="contenido">
+
+    <section id="inicio" class="portada" aria-labelledby="titulo-portada">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7">
+            <p class="etiqueta-portada">Tienda en línea · Despacho a todo Chile</p>
+            <h1 id="titulo-portada" class="display-5 fw-bold">
+              Tu próxima partida empieza en PixelPlay
+            </h1>
+            <p class="lead mb-4">
+              Doce títulos seleccionados para PC y consolas, con fichas claras, precios en pesos
+              chilenos y descarga inmediata al confirmar la compra.
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+              <a class="btn btn-pixel btn-lg" href="#catalogo">Ver el catálogo</a>
+              <a class="btn btn-outline-light btn-lg" href="#contacto">Escribirnos</a>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <ul class="lista-ventajas list-unstyled mb-0">
+              <li>
+                <span class="icono-ventaja" aria-hidden="true">01</span>
+                <div>
+                  <h2 class="h6 mb-1">Claves al instante</h2>
+                  <p class="mb-0">Recibes el código de activación en tu correo apenas se aprueba el pago.</p>
+                </div>
+              </li>
+              <li>
+                <span class="icono-ventaja" aria-hidden="true">02</span>
+                <div>
+                  <h2 class="h6 mb-1">Catálogo verificado</h2>
+                  <p class="mb-0">Cada ficha indica plataforma, género y clasificación por edad.</p>
+                </div>
+              </li>
+              <li>
+                <span class="icono-ventaja" aria-hidden="true">03</span>
+                <div>
+                  <h2 class="h6 mb-1">Soporte en español</h2>
+                  <p class="mb-0">Respondemos los mensajes del formulario en menos de 24 horas hábiles.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="catalogo" class="seccion" aria-labelledby="titulo-catalogo">
+      <div class="container">
+
+        <div class="encabezado-seccion">
+          <h2 id="titulo-catalogo">Catálogo de videojuegos</h2>
+          <p>Filtra por categoría o busca por nombre, plataforma o género.</p>
+        </div>
+
+        <div class="panel-filtros">
+          <div class="row g-3 align-items-end">
+            <div class="col-lg-8">
+              <fieldset>
+                <legend class="form-label fw-semibold">Categoría</legend>
+                <div
+                  class="d-flex flex-wrap gap-2"
+                  id="filtrosCategoria"
+                  role="group"
+                  aria-label="Filtrar el catálogo por categoría">
+                  <!-- Los botones se generan en catalogo.js a partir de las categorías del objeto de datos. -->
+                </div>
+              </fieldset>
+            </div>
+            <div class="col-lg-4">
+              <label class="form-label fw-semibold" for="busqueda">Buscar</label>
+              <input
+                class="form-control"
+                type="search"
+                id="busqueda"
+                name="busqueda"
+                placeholder="Nombre, plataforma o género"
+                autocomplete="off">
+            </div>
+          </div>
+        </div>
+
+        <p class="resumen-resultados" id="resumenResultados" role="status" aria-live="polite"></p>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 g-4" id="rejillaCatalogo">
+          <!-- Las tarjetas se insertan desde catalogo.js. -->
+        </div>
+
+        <div class="estado-vacio d-none" id="sinResultados">
+          <h3 class="h5">Sin resultados</h3>
+          <p>Ningún videojuego coincide con el filtro aplicado.</p>
+          <button class="btn btn-pixel" type="button" id="limpiarFiltros">Ver todo el catálogo</button>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="contacto" class="seccion seccion-alterna" aria-labelledby="titulo-contacto">
+      <div class="container">
+        <div class="row g-4 justify-content-center">
+          <div class="col-lg-5">
+            <div class="encabezado-seccion text-start">
+              <h2 id="titulo-contacto">Contacto</h2>
+              <p>
+                Escríbenos por recomendaciones, compras al por mayor o problemas con una clave de
+                activación. Los tres campos del formulario son obligatorios.
+              </p>
+            </div>
+            <ul class="datos-contacto list-unstyled">
+              <li><strong>Correo</strong><br><a href="mailto:contacto@pixelplay.cl">contacto@pixelplay.cl</a></li>
+              <li><strong>Teléfono</strong><br><a href="tel:+56912345678">+56 9 1234 5678</a></li>
+              <li><strong>Horario</strong><br>Lunes a viernes, 9:00 a 19:00 h</li>
+            </ul>
+          </div>
+
+          <div class="col-lg-6">
+            <form class="tarjeta-formulario" id="formularioContacto" novalidate>
+              <h3 class="h5 mb-3">Envíanos un mensaje</h3>
+
+              <div class="mb-3">
+                <label class="form-label" for="nombre">Nombre</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="nombre"
+                  name="nombre"
+                  autocomplete="name"
+                  aria-describedby="errorNombre">
+                <p class="mensaje-error" id="errorNombre"></p>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="email">Correo electrónico</label>
+                <input
+                  class="form-control"
+                  type="email"
+                  id="email"
+                  name="email"
+                  autocomplete="email"
+                  aria-describedby="errorEmail">
+                <p class="mensaje-error" id="errorEmail"></p>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="mensaje">Mensaje</label>
+                <textarea
+                  class="form-control"
+                  id="mensaje"
+                  name="mensaje"
+                  rows="5"
+                  aria-describedby="errorMensaje ayudaMensaje"></textarea>
+                <p class="form-text" id="ayudaMensaje">Entre 10 y 500 caracteres.</p>
+                <p class="mensaje-error" id="errorMensaje"></p>
+              </div>
+
+              <button class="btn btn-pixel w-100" type="submit">Enviar mensaje</button>
+
+              <div
+                class="alert mt-3 d-none"
+                id="avisoFormulario"
+                role="alert"
+                aria-live="assertive"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pie">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-5">
+          <p class="fw-bold mb-2">PixelPlay Store</p>
+          <p class="mb-0">
+            Proyecto académico de la Evaluación Final Transversal de Desarrollo Frontend I
+            (PFY2201). Los productos, precios y datos de contacto son ficticios.
+          </p>
+        </div>
+        <div class="col-md-3">
+          <p class="fw-bold mb-2">Secciones</p>
+          <ul class="list-unstyled mb-0">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#catalogo">Catálogo</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="panel/">Panel React</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <p class="fw-bold mb-2">Autoría</p>
+          <ul class="list-unstyled mb-0">
+            <li>Ignacio Miño Astorga</li>
+            <li>Duoc UC · Analista Programador Computacional</li>
+            <li><a href="https://github.com/Ign14/DF1_ExpSumativas">Repositorio en GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <p class="mb-0 text-center">Semana 9 · Evaluación Final Transversal · 2026</p>
+    </div>
+  </footer>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="js/datos.js"></script>
+  <script src="js/catalogo.js"></script>
+  <script src="js/contacto.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
