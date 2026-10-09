@@ -50,6 +50,14 @@ export default function App() {
     setBusqueda('');
   }, []);
 
+  /* Agregar limpia los filtros: si no, la tarjeta recién creada puede quedar
+     fuera del filtro activo y el usuario no vería aparecer nada. */
+  const agregarVideojuego = useCallback((datos) => {
+    const nuevo = agregar(datos);
+    limpiarFiltros();
+    return nuevo;
+  }, [agregar, limpiarFiltros]);
+
   const registrarMensaje = useCallback(() => {
     setMensajesRecibidos((cantidad) => cantidad + 1);
   }, []);
@@ -104,7 +112,7 @@ export default function App() {
           <h2 className="h5 visually-hidden" id="titulo-formularios">Formularios</h2>
 
           <div className="col-lg-6">
-            <FormularioVideojuego categorias={categorias} onAgregar={agregar} />
+            <FormularioVideojuego categorias={categorias} onAgregar={agregarVideojuego} />
           </div>
 
           <div className="col-lg-6">

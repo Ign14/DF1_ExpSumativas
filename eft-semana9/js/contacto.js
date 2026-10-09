@@ -78,6 +78,15 @@
       aviso.className = 'alert mt-3 ' + clase;
     }
 
+    /* Al empezar un mensaje nuevo se retira la confirmación del anterior, que
+       si no quedaría en pantalla contradiciendo lo que el usuario está haciendo. */
+    function retirarConfirmacion() {
+      if (aviso.classList.contains('alert-success')) {
+        aviso.textContent = '';
+        aviso.className = 'alert mt-3 d-none';
+      }
+    }
+
     function iniciar() {
       /* Al salir de un campo ya rellenado se avisa el error sin esperar el envío. */
       campos.forEach(function (campo) {
@@ -88,6 +97,7 @@
         });
 
         campo.entrada.addEventListener('input', function () {
+          retirarConfirmacion();
           if (campo.error.textContent !== '') {
             mostrarError(campo, campo.validar(campo.entrada.value));
           }
